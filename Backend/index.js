@@ -7,7 +7,9 @@ const router = require("./Routes/StudentRegistrations/StudentRegistrations");
 const app = express();
 DB();
 
-app.use(cors());
+app.use(cors(
+  
+));
 app.use(express.json());
 app.use("/api/student", router);
 
