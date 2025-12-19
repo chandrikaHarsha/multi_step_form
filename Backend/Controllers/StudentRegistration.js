@@ -19,7 +19,7 @@ const getStudent = async (req, res) => {
       student = await StudentRegistration.findById(req.session.studentId);
     }
     if (!student) {
-      await StudentRegistration.create({});
+      student = await StudentRegistration.create({});
       req.session.studentId = student._id;
     }
     const currentStep = !student?.draft?.step1?.name
@@ -27,10 +27,10 @@ const getStudent = async (req, res) => {
       : !student?.draft?.step2?.phone
       ? 2
       : 3;
-      res.json({draft:student.draft,currentStep,id:student._id})
+    res.json({ draft: student.draft, currentStep, id: student._id });
   } catch (err) {
-    res.status(500).json({error:err.message});
     console.log("Error while fetching student: ", err);
+    res.status(500).json({ error: err.message });
   }
 };
 
