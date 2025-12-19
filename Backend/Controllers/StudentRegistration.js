@@ -16,7 +16,7 @@ const getStudent = async (req, res) => {
   try {
     let student;
     if (req.session.studentId) {
-      student = await StudentRegistration.findById(req.session.sessionId);
+      student = await StudentRegistration.findById(req.session.studentId);
     }
     if (!student) {
       await StudentRegistration.create({});
