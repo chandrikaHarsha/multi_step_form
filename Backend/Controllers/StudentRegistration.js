@@ -1,21 +1,35 @@
+const StudentRegistration = require("../Models/StudentRegistration");
 const StudentRegistrations = require("../Models/StudentRegistration");
 
 // create empty draft
-const createStudent = async (req, res) => {
-  try {
-    const student = await StudentRegistrations.create({});
-    res.json(student);
-  } catch (err) {
-    console.log("Student Creation Error: ", err);
-  }
-};
+// const createStudent = async (req, res) => {
+//   try {
+//     const student = await StudentRegistrations.create({});
+//     res.json(student);
+//   } catch (err) {
+//     console.log("Student Creation Error: ", err);
+//   }
+// };
 
 // get draft (resume)
 const getStudent = async (req, res) => {
   try {
-    const student = await StudentRegistrations.findById(req.params.id);
-    res.json(student);
+    let student;
+    if (req.session.studentId) {
+      student = await StudentRegistration.findById(req.session.sessionId);
+    }
+    if (!student) {
+      await StudentRegistration.create({});
+      req.session.studentId = student._id;
+    }
+    const currentStep = !student?.draft?.step1?.name
+      ? 1
+      : !student?.draft?.step2?.phone
+      ? 2
+      : 3;
+      res.json({draft:student.draft,currentStep,id:student._id})
   } catch (err) {
+    res.status(500).json({error:err.message});
     console.log("Error while fetching student: ", err);
   }
 };
@@ -60,7 +74,7 @@ const publishStudent = async (req, res) => {
         },
       ],
       {
-        updatePipeline: true, 
+        updatePipeline: true,
         new: true,
       }
     );
@@ -72,7 +86,7 @@ const publishStudent = async (req, res) => {
 };
 
 module.exports = {
-  createStudent,
+  // createStudent,
   getStudent,
   saveDraftStep,
   publishStudent,

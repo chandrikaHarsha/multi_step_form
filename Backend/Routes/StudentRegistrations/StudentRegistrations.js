@@ -1,6 +1,6 @@
 const express = require("express");
 const {
-  createStudent,
+  // createStudent,
   getStudent,
   saveDraftStep,
   publishStudent,
@@ -8,8 +8,8 @@ const {
 
 const router = express.Router();
 
-router.post("/", createStudent);
-router.get("/:id", getStudent);
+// router.post("/", createStudent);
+router.get("/draft", getStudent);
 router.put("/draft/:id", saveDraftStep);
 router.put("/publish/:id", publishStudent);
 
