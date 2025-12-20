@@ -6,7 +6,7 @@ function Step3({ data, setData }) {
       <h1 className="text-center uppercase text-3xl">Step-3</h1>
       <input
         type="email"
-        className="border p-2 rounded"
+        className="border p-2 rounded text-black"
         placeholder="Enter your email"
         name="email"
         value={data.step3.email}
