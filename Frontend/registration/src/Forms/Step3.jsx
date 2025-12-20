@@ -9,7 +9,7 @@ function Step3({ data, setData }) {
         className="border p-2 rounded"
         placeholder="Enter your email"
         name="email"
-        value={data.step1.email}
+        value={data.step3.email}
         onChange={(e) => setData({ ...data, step3: { email: e.target.value } })}
       />
     </div>

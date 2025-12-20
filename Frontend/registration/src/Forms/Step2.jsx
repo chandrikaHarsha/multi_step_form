@@ -9,7 +9,7 @@ function Step2({ data, setData }) {
         className="border p-2 rounded text-black"
         placeholder="Enter your contact number (Active)"
         name="number"
-        value={data.step1.number}
+        value={data.step2.number}
         onChange={(e) =>
           setData({ ...data, step2: { number: e.target.value } })
         }

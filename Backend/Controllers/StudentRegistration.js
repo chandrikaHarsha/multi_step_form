@@ -22,9 +22,12 @@ const getStudent = async (req, res) => {
       student = await StudentRegistration.create({});
       req.session.studentId = student._id;
     }
+    if (student.status === "published") {
+      return res.status(403).json({ message: "Form already submitted." });
+    }
     const currentStep = !student?.draft?.step1?.name
       ? 1
-      : !student?.draft?.step2?.phone
+      : !student?.draft?.step2?.number
       ? 2
       : 3;
     res.json({ draft: student.draft, currentStep, id: student._id });

@@ -28,6 +28,11 @@ function RegistrationForm() {
         setId(res.data.id);                
         setData(res.data.draft);           
         setStep(res.data.currentStep);     
+      }).catch(err=>{
+        if(err.response?.status===403){
+          alert("You have already submitted the form!");
+          navigate("/");
+        }
       })
       .finally(() => setLoading(false));
   }, []);

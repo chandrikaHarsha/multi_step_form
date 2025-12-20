@@ -6,7 +6,7 @@ function Step1({ data, setData }) {
       <h1 className="text-center uppercase text-3xl">Step-1</h1>
       <input
         type="text"
-        className="border p-2 rounded"
+        className="border p-2 rounded text-black"
         placeholder="Enter your name"
         value={data.step1.name}
         name="name"
